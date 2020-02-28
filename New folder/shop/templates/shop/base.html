@@ -1,0 +1,40 @@
+{% load static %}
+{% load crispy_forms_filters %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}My shop{% endblock %}</title>
+</head>
+<body>
+<font color="white">
+  <div id="header">
+    <a href="/" class="logo" style="color:#fffa06;">My shop</a>
+  </div>
+
+  <div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Your cart:
+                <a href="{% url "cart:cart_detail" %}" style="color:#fffa06;">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    ${{ cart.get_total_price }}
+                </a>
+    {% else %}
+      Your cart is empty.
+    {% endif %}
+  {% endwith %}
+
+
+
+
+    </div>
+  </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </font>
+  </div>
+</body>
+</html>
